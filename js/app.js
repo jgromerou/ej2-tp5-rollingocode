@@ -73,7 +73,7 @@ class Persona {
   }
   //set
   set nombre(nuevoNombre) {
-    if (nuevoNombre > 0) {
+    if (nuevoNombre.length > 0) {
       this.#nombre = nuevoNombre;
     }
   }
@@ -88,7 +88,7 @@ class Persona {
     }
   }
   set genero(nuevoGenero) {
-    if (nuevoGenero > 0) {
+    if (nuevoGenero.length > 0) {
       this.#genero = nuevoGenero;
     }
   }
@@ -104,7 +104,7 @@ class Persona {
   }
   set anionacimiento(nuevoAnionacimiento) {
     if (nuevoAnionacimiento > 0) {
-      this.#anionacimiento = nuevoDni;
+      this.#anionacimiento = nuevoAnionacimiento;
     }
   }
   set cuil(nuevoCuil) {
@@ -139,12 +139,12 @@ class Persona {
   }
 
   mostrarGeneracion() {
+    console.log('soy yo');
     let generacion = generaciones.find((element) =>
-      element.marcoTemporal.includes(this.anionacimiento)
+      element.marcoTemporal.includes(parseInt(this.anionacimiento))
     );
-    console.log(
-      `Pertenece a la generación: ${generacion.nombre} y su rasgo característico es: ${generacion.rasgoCaracteristico}`
-    );
+    let modalBody = document.getElementById('modal-body');
+    modalBody.innerHTML = `Pertenece a la generación: ${generacion.nombre} y su rasgo característico es: ${generacion.rasgoCaracteristico}`;
   }
   esMayordeEdad() {
     if (this.edad >= 18) {
@@ -229,37 +229,54 @@ class Persona {
 // );
 
 //Ejercicio 2 TP 5
+//inicializar
+const persona1 = new Persona();
+
 let formulario = document.querySelector('form');
 //TODO: traer el botón Generación y el botón esMayordeEdad
-
+let botonMostrarGeneracion = document.getElementById('botonMostrarGeneracion');
 //addEventListener
 formulario.addEventListener('submit', guardarPersona);
-
+botonMostrarGeneracion.addEventListener('click', mostrarGeneracion);
 //Funciones
 function guardarPersona(persona) {
   persona.preventDefault();
-  persona.target.classList.add('was-validated');
+  // persona.target.classList.add('was-validated');
   console.log(persona.target[0].value);
 
-  //inicializar
-  const nuevaPersona = new Persona(
-    persona.target[0].value,
-    persona.target[1].value,
-    persona.target[2].value,
-    persona.target[3].value,
-    persona.target[4].value,
-    persona.target[5].value,
-    persona.target[6].value,
-    persona.target[7].value
-  );
+  //settear
+  persona1.nombre = persona.target[0].value;
+  persona1.edad = persona.target[1].value;
+  persona1.dni = persona.target[2].value;
+  persona1.genero = persona.target[3].value;
+  persona1.peso = persona.target[4].value;
+  persona1.altura = persona.target[5].value;
+  persona1.anionacimiento = persona.target[6].value;
+  persona1.cuil = persona.target[7].value;
 
-  nuevaPersona.mostrarDatos();
+  console.log(persona1);
+
+  persona1.mostrarDatos();
   //nuevaPersona.mostrarGeneracion();
   //nuevaPersona.esMayordeEdad();
   deshabilitarBotonGuardar();
+  habilitarBotonesGeneracionyMayordeEdad();
+}
+
+function mostrarGeneracion() {
+  return persona1.mostrarGeneracion();
 }
 
 function deshabilitarBotonGuardar() {
   let botonGuardar = document.getElementById('botonGuardar');
   botonGuardar.disabled = true;
+}
+
+function habilitarBotonesGeneracionyMayordeEdad() {
+  let botonMostrarGeneracion = document.getElementById(
+    'botonMostrarGeneracion'
+  );
+  botonMostrarGeneracion.classList.remove('d-none');
+  let botonMayorEdad = document.getElementById('botonMayorEdad');
+  botonMayorEdad.classList.remove('d-none');
 }

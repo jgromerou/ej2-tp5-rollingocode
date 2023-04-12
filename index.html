@@ -99,8 +99,8 @@
                   >
                   <select class="form-select" id="validationCustom04" required>
                     <option selected disabled value="">Elegir...</option>
-                    <option>Hombre</option>
-                    <option>Mujer</option>
+                    <option value="Hombre">Hombre</option>
+                    <option value="Mujer">Mujer</option>
                   </select>
                   <div class="invalid-feedback">
                     Por favor, seleccione un género.
@@ -149,7 +149,7 @@
                     type="text"
                     class="form-control"
                     id="validationCustom02"
-                    placeholder="dd/mm/aaaa"
+                    placeholder="aaaa"
                     required
                   />
                   <div class="valid-feedback">¡Se vé bien!</div>
@@ -178,11 +178,26 @@
           </article>
           <article id="imagenPadre" class="col-12 col-md-4 card p-1">
             <div id="mostrarDatos" class="col-12 p-2"></div>
-            <div class="col-12 p-2">
-              <button class="btn btn-primary w-100">Mostrar generación</button>
+            <div
+              class="col-12 p-2"
+              data-bs-toggle="modal"
+              data-bs-target="#myModal"
+            >
+              <button
+                id="botonMostrarGeneracion"
+                class="btn btn-primary w-100 d-none"
+              >
+                Mostrar generación
+              </button>
             </div>
-            <div class="col-12 p-2">
-              <button class="btn btn-primary w-100">¿Es mayor de edad?</button>
+            <div
+              class="col-12 p-2"
+              data-bs-toggle="modal"
+              data-bs-target="#myModal"
+            >
+              <button id="botonMayorEdad" class="btn btn-primary w-100 d-none">
+                ¿Es mayor de edad?
+              </button>
             </div>
           </article>
         </div>
