@@ -148,9 +148,11 @@ class Persona {
   }
   esMayordeEdad() {
     if (this.edad >= 18) {
-      console.log(`Es mayor de edad`);
+      let modalBody = document.getElementById('modal-body');
+      modalBody.innerHTML = `${this.nombre} es MAYOR de edad`;
     } else {
-      console.log(`Es menor de edad`);
+      let modalBody = document.getElementById('modal-body');
+      modalBody.innerHTML = `${this.nombre} es MENOR de edad`;
     }
   }
   mostrarDatos() {
@@ -235,9 +237,11 @@ const persona1 = new Persona();
 let formulario = document.querySelector('form');
 //TODO: traer el botón Generación y el botón esMayordeEdad
 let botonMostrarGeneracion = document.getElementById('botonMostrarGeneracion');
+let botonMayorEdad = document.getElementById('botonMayorEdad');
 //addEventListener
 formulario.addEventListener('submit', guardarPersona);
 botonMostrarGeneracion.addEventListener('click', mostrarGeneracion);
+botonMayorEdad.addEventListener('click', mostrarMayorEdad);
 //Funciones
 function guardarPersona(persona) {
   persona.preventDefault();
@@ -265,6 +269,10 @@ function guardarPersona(persona) {
 
 function mostrarGeneracion() {
   return persona1.mostrarGeneracion();
+}
+
+function mostrarMayorEdad() {
+  return persona1.esMayordeEdad();
 }
 
 function deshabilitarBotonGuardar() {
