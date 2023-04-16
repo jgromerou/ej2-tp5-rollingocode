@@ -20,9 +20,6 @@
     <header>
       <div class="bg-body-secondary">
         <h1 class="text-center p-3 my-2">Generaciones</h1>
-        <!-- <h2 id="subtitulo" class="text-center m-2 pt-2 pb-3">
-          Elige un número del 0 al 100:
-        </h2> -->
       </div>
     </header>
 
@@ -31,34 +28,12 @@
         <div class="row m-2 justify-content-center align-content-center">
           <article id="seccionPadreJugador" class="col-12 col-md-8 card p-1">
             <div class="card-header">Persona:</div>
-            <div
-              id="contenedorNumeroJugador"
-              class="d-flex flex-column justify-content-center align-items-center p-1"
-            >
-              <!-- <form>
-                <div class="pt-2 mb-3">
-                  <label for="inputNumero" class="form-label"
-                    >Ingrese el número:</label
-                  >
-                  <input
-                    id="inputNumero"
-                    type="number"
-                    class="form-control"
-                    aria-describedby="emailHelp"
-                  />
-                </div>
-
-                <button
-                  id="botonEleccionJugador"
-                  type="submit"
-                  class="btn btn-primary mb-2 p-2 fs-6"
-                  data-bs-toggle="modal"
-                  data-bs-target="#myModal"
-                >
-                  Iniciar el Juego
-                </button>
-              </form> -->
-              <form class="row g-3 needs-validation" novalidate>
+            <div id="contenedorNumeroJugador" class="d-flex flex-column p-1">
+              <form
+                id="formPersona"
+                type="submit"
+                class="row g-3 needs-validation"
+              >
                 <div class="col-md-9">
                   <label for="validationCustom01" class="form-label"
                     >Nombre</label
@@ -68,6 +43,7 @@
                     class="form-control"
                     id="validationCustom01"
                     placeholder="Ingrese nombre"
+                    onKeyPress="if(this.value.length==30) return false;"
                     required
                   />
                   <div class="valid-feedback">¡Se vé bien!</div>
@@ -76,13 +52,10 @@
                   <label for="validationCustom02" class="form-label"
                     >Edad</label
                   >
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="validationCustom02"
-                    placeholder="Edad"
-                    required
-                  />
+                  <select
+                    class="form-select centerSelect"
+                    id="selectEdad"
+                  ></select>
                   <div class="valid-feedback">¡Se vé bien!</div>
                 </div>
                 <div class="col-md-6">
@@ -92,6 +65,7 @@
                     class="form-control"
                     id="validationCustom02"
                     placeholder="Ingrese dni"
+                    onkeypress="return event.charCode !== 101 && event.charCode !== 69 && this.value.length!=10"
                     required
                   />
                   <div class="valid-feedback">¡Se vé bien!</div>
@@ -102,8 +76,8 @@
                   >
                   <select class="form-select" id="validationCustom04" required>
                     <option selected disabled value="">Elegir...</option>
-                    <option>Hombre</option>
-                    <option>Mujer</option>
+                    <option value="Hombre">Hombre</option>
+                    <option value="Mujer">Mujer</option>
                   </select>
                   <div class="invalid-feedback">
                     Por favor, seleccione un género.
@@ -120,6 +94,7 @@
                       class="form-control"
                       id="validationCustomPeso"
                       aria-describedby="inputGroupPrepend"
+                      onkeypress="return event.charCode !== 101 && event.charCode !== 69 && this.value.length!=2"
                       required
                     />
                     <span class="input-group-text" id="inputGroupPrepend"
@@ -137,6 +112,7 @@
                       class="form-control"
                       id="validationCustomAltura"
                       aria-describedby="inputGroupPrepend"
+                      onkeypress="return event.charCode !== 101 && event.charCode !== 69 && this.value.length!=3"
                       required
                     />
                     <span class="input-group-text" id="inputGroupPrepend"
@@ -148,13 +124,10 @@
                   <label for="validationCustom02" class="form-label"
                     >Año Nacimiento</label
                   >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="validationCustom02"
-                    placeholder="dd/mm/aaaa"
-                    required
-                  />
+                  <select
+                    class="form-select centerSelect"
+                    id="selectAnionacimiento"
+                  ></select>
                   <div class="valid-feedback">¡Se vé bien!</div>
                 </div>
                 <div class="col-md-6">
@@ -166,13 +139,14 @@
                     class="form-control"
                     id="validationCustom02"
                     placeholder="Ingrese CUIL"
+                    onkeypress="return event.charCode !== 101 && event.charCode !== 69 && this.value.length!=13"
                     required
                   />
                   <div class="valid-feedback">¡Se vé bien!</div>
                 </div>
 
                 <div class="col-12">
-                  <button class="btn btn-primary my-2" type="submit">
+                  <button id="botonGuardar" class="btn btn-primary my-2">
                     Guardar
                   </button>
                 </div>
@@ -180,58 +154,72 @@
             </div>
           </article>
           <article id="imagenPadre" class="col-12 col-md-4 card p-1">
-            <div class="col-12 p-2">
-              <button class="btn btn-primary w-100">Mostrar generación</button>
+            <div id="mostrarDatos" class="col-12 p-2"></div>
+            <div
+              class="col-12 p-2"
+              data-bs-toggle="modal"
+              data-bs-target="#myModal"
+            >
+              <button
+                id="botonMostrarGeneracion"
+                class="btn btn-primary w-100 d-none"
+              >
+                Mostrar generación
+              </button>
             </div>
-            <div class="col-12 p-2">
-              <button class="btn btn-primary w-100">¿Es mayor de edad?</button>
+            <div
+              class="col-12 p-2"
+              data-bs-toggle="modal"
+              data-bs-target="#myModal"
+            >
+              <button id="botonMayorEdad" class="btn btn-primary w-100 d-none">
+                ¿Es mayor de edad?
+              </button>
             </div>
           </article>
         </div>
       </section>
       <section class="m-2 p-2 text-center">
-        <button class="btn btn-success fs-6 disabled">
+        <button id="botonLimpiarForm" class="btn btn-success fs-6 disabled">
           Limpiar Formulario
         </button>
       </section>
-      <section>
-        <!-- Modal -->
-        <div
-          class="modal fade"
-          id="myModal"
-          tabindex="-1"
-          aria-labelledby="myModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="myModalLabel">
-                  Alerta del Sistema
-                </h1>
-                <button
-                  id="botonCloseModal"
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div id="modal-body" class="modal-body" role="alert"></div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Aceptar
-                </button>
-              </div>
-            </div>
+    </main>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="myModal"
+      tabindex="-1"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="myModalLabel">
+              Alerta del Sistema
+            </h1>
+            <button
+              id="botonCloseModal"
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div id="modal-body" class="modal-body" role="alert"></div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Aceptar
+            </button>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
     <footer class="bg-dark text-center text-light py-3">
       <p>&copy; Todos los derechos reservados</p>
     </footer>
