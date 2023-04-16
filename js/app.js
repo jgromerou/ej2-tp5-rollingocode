@@ -231,6 +231,7 @@ class Persona {
 // );
 
 //Ejercicio 2 TP 5
+window.addEventListener('DOMContentLoaded', select);
 //inicializar
 const persona1 = new Persona();
 
@@ -238,11 +239,12 @@ let formulario = document.querySelector('form');
 //TODO: traer el botón Generación y el botón esMayordeEdad
 let botonMostrarGeneracion = document.getElementById('botonMostrarGeneracion');
 let botonMayorEdad = document.getElementById('botonMayorEdad');
+let botonLimpiarForm = document.getElementById('botonLimpiarForm');
 //addEventListener
 formulario.addEventListener('submit', guardarPersona);
 botonMostrarGeneracion.addEventListener('click', mostrarGeneracion);
 botonMayorEdad.addEventListener('click', mostrarMayorEdad);
-window.addEventListener('DOMContentLoaded', select);
+botonLimpiarForm.addEventListener('click', limpiarFormulario);
 //Funciones
 function select() {
   const selectEdad = document.getElementById('selectEdad');
@@ -318,6 +320,7 @@ function mostrarMayorEdad() {
 function deshabilitarBotonGuardar() {
   let botonGuardar = document.getElementById('botonGuardar');
   botonGuardar.disabled = true;
+  document.getElementById('botonLimpiarForm').classList.remove('disabled');
 }
 
 function habilitarBotonesGeneracionyMayordeEdad() {
@@ -327,4 +330,14 @@ function habilitarBotonesGeneracionyMayordeEdad() {
   botonMostrarGeneracion.classList.remove('d-none');
   let botonMayorEdad = document.getElementById('botonMayorEdad');
   botonMayorEdad.classList.remove('d-none');
+}
+
+function limpiarFormulario() {
+  document.getElementById('formPersona').reset();
+  document.getElementById('botonGuardar').disabled = false;
+  document.getElementById('botonLimpiarForm').classList.add('disabled');
+  const imagenPadre = document.getElementById('imagenPadre');
+  console.log(imagenPadre.children);
+  const mostrarDatos = document.getElementById('mostrarDatos');
+  imagenPadre.removeChild(mostrarDatos);
 }
