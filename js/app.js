@@ -246,10 +246,12 @@ window.addEventListener('DOMContentLoaded', select);
 //Funciones
 function select() {
   const selectEdad = document.getElementById('selectEdad');
-  optionChoose(selectEdad, 110);
+  optionChooseEdad(selectEdad, 110);
+  const selectAnionacimiento = document.getElementById('selectAnionacimiento');
+  optionChooseAnionacimiento(selectAnionacimiento, 1930, 2010);
 }
 
-function optionChoose(selectId, numero) {
+function optionChooseEdad(selectId, numero) {
   const option00 = document.createElement('option');
   option00.selected = true;
   option00.value = '00';
@@ -261,6 +263,22 @@ function optionChoose(selectId, numero) {
     option00.selected = true;
     option.value = i.toString().padStart(2, '0');
     option.innerHTML = i.toString().padStart(2, '0');
+    selectId.appendChild(option);
+  }
+}
+
+function optionChooseAnionacimiento(selectId, finicio, ffin) {
+  const option00 = document.createElement('option');
+  option00.selected = true;
+  option00.value = String(finicio);
+  option00.innerHTML = String(finicio);
+  selectId.appendChild(option00);
+
+  for (let i = finicio; i <= ffin; i++) {
+    const option = document.createElement('option');
+    option00.selected = true;
+    option.value = i.toString().padStart(4, '0');
+    option.innerHTML = i.toString().padStart(4, '0');
     selectId.appendChild(option);
   }
 }
