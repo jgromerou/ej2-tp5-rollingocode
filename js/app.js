@@ -139,7 +139,6 @@ class Persona {
   }
 
   mostrarGeneracion() {
-    console.log('soy yo');
     let generacion = generaciones.find((element) =>
       element.marcoTemporal.includes(parseInt(this.anionacimiento))
     );
@@ -223,17 +222,18 @@ window.addEventListener('DOMContentLoaded', select);
 //inicializar
 const persona1 = new Persona();
 
-let formulario = document.querySelector('form');
-//TODO: traer el botón Generación y el botón esMayordeEdad
-let botonMostrarGeneracion = document.getElementById('botonMostrarGeneracion');
-let botonMayorEdad = document.getElementById('botonMayorEdad');
-let botonLimpiarForm = document.getElementById('botonLimpiarForm');
-
 //addEventListener
-formulario.addEventListener('submit', guardarPersona);
-botonMostrarGeneracion.addEventListener('click', mostrarGeneracion);
-botonMayorEdad.addEventListener('click', mostrarMayorEdad);
-botonLimpiarForm.addEventListener('click', limpiarFormulario);
+document.querySelector('form').addEventListener('submit', guardarPersona);
+document
+  .getElementById('botonMostrarGeneracion')
+  .addEventListener('click', mostrarGeneracion);
+document
+  .getElementById('botonMayorEdad')
+  .addEventListener('click', mostrarMayorEdad);
+document
+  .getElementById('botonLimpiarForm')
+  .addEventListener('click', limpiarFormulario);
+
 //Funciones
 function select() {
   const selectEdad = document.getElementById('selectEdad');
@@ -276,7 +276,6 @@ function optionChooseAnionacimiento(selectId, finicio, ffin) {
 
 function guardarPersona(persona) {
   persona.preventDefault();
-  console.log(persona.target[0].value);
 
   //settear
   persona1.nombre = persona.target[0].value;
@@ -287,8 +286,6 @@ function guardarPersona(persona) {
   persona1.altura = persona.target[5].value;
   persona1.anionacimiento = persona.target[6].value;
   persona1.cuil = persona.target[7].value;
-
-  console.log(persona1);
 
   persona1.mostrarDatos();
   deshabilitarBotonGuardar();
@@ -323,7 +320,6 @@ function limpiarFormulario() {
   document.getElementById('botonGuardar').disabled = false;
   document.getElementById('botonLimpiarForm').classList.add('disabled');
   const imagenPadre = document.getElementById('imagenPadre');
-  console.log(imagenPadre.children);
   const mostrarDatos = document.getElementById('mostrarDatos');
   imagenPadre.removeChild(mostrarDatos);
 }
