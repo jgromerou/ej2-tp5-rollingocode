@@ -65,6 +65,7 @@
                     class="form-control"
                     id="validationCustom01"
                     placeholder="Ingrese nombre"
+                    onKeyPress="if(this.value.length==30) return false;"
                     required
                   />
                   <div class="valid-feedback">¡Se vé bien!</div>
@@ -73,13 +74,10 @@
                   <label for="validationCustom02" class="form-label"
                     >Edad</label
                   >
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="validationCustom02"
-                    placeholder="Edad"
-                    required
-                  />
+                  <select
+                    class="form-select centerSelect"
+                    id="selectEdad"
+                  ></select>
                   <div class="valid-feedback">¡Se vé bien!</div>
                 </div>
                 <div class="col-md-6">
@@ -89,6 +87,7 @@
                     class="form-control"
                     id="validationCustom02"
                     placeholder="Ingrese dni"
+                    onkeypress="return event.charCode !== 101 && event.charCode !== 69 && this.value.length!=10"
                     required
                   />
                   <div class="valid-feedback">¡Se vé bien!</div>
@@ -117,6 +116,7 @@
                       class="form-control"
                       id="validationCustomPeso"
                       aria-describedby="inputGroupPrepend"
+                      onkeypress="return event.charCode !== 101 && event.charCode !== 69 && this.value.length!=2"
                       required
                     />
                     <span class="input-group-text" id="inputGroupPrepend"
@@ -134,6 +134,7 @@
                       class="form-control"
                       id="validationCustomAltura"
                       aria-describedby="inputGroupPrepend"
+                      onkeypress="return event.charCode !== 101 && event.charCode !== 69 && this.value.length!=3"
                       required
                     />
                     <span class="input-group-text" id="inputGroupPrepend"
@@ -163,6 +164,7 @@
                     class="form-control"
                     id="validationCustom02"
                     placeholder="Ingrese CUIL"
+                    onkeypress="return event.charCode !== 101 && event.charCode !== 69 && this.value.length!=13"
                     required
                   />
                   <div class="valid-feedback">¡Se vé bien!</div>

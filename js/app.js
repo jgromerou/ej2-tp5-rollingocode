@@ -242,7 +242,29 @@ let botonMayorEdad = document.getElementById('botonMayorEdad');
 formulario.addEventListener('submit', guardarPersona);
 botonMostrarGeneracion.addEventListener('click', mostrarGeneracion);
 botonMayorEdad.addEventListener('click', mostrarMayorEdad);
+window.addEventListener('DOMContentLoaded', select);
 //Funciones
+function select() {
+  const selectEdad = document.getElementById('selectEdad');
+  optionChoose(selectEdad, 110);
+}
+
+function optionChoose(selectId, numero) {
+  const option00 = document.createElement('option');
+  option00.selected = true;
+  option00.value = '00';
+  option00.innerHTML = '00';
+  selectId.appendChild(option00);
+
+  for (let i = 1; i <= numero; i++) {
+    const option = document.createElement('option');
+    option00.selected = true;
+    option.value = i.toString().padStart(2, '0');
+    option.innerHTML = i.toString().padStart(2, '0');
+    selectId.appendChild(option);
+  }
+}
+
 function guardarPersona(persona) {
   persona.preventDefault();
   // persona.target.classList.add('was-validated');
