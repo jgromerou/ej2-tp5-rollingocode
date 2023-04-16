@@ -218,18 +218,6 @@ class Persona {
   // }
 }
 
-//inicializar
-// const Pedro = new Persona(
-//   'Pedro',
-//   85,
-//   '11111123',
-//   'M',
-//   80,
-//   185,
-//   1938,
-//   '20111111230'
-// );
-
 //Ejercicio 2 TP 5
 window.addEventListener('DOMContentLoaded', select);
 //inicializar
@@ -240,6 +228,7 @@ let formulario = document.querySelector('form');
 let botonMostrarGeneracion = document.getElementById('botonMostrarGeneracion');
 let botonMayorEdad = document.getElementById('botonMayorEdad');
 let botonLimpiarForm = document.getElementById('botonLimpiarForm');
+
 //addEventListener
 formulario.addEventListener('submit', guardarPersona);
 botonMostrarGeneracion.addEventListener('click', mostrarGeneracion);
@@ -287,7 +276,6 @@ function optionChooseAnionacimiento(selectId, finicio, ffin) {
 
 function guardarPersona(persona) {
   persona.preventDefault();
-  // persona.target.classList.add('was-validated');
   console.log(persona.target[0].value);
 
   //settear
@@ -303,8 +291,6 @@ function guardarPersona(persona) {
   console.log(persona1);
 
   persona1.mostrarDatos();
-  //nuevaPersona.mostrarGeneracion();
-  //nuevaPersona.esMayordeEdad();
   deshabilitarBotonGuardar();
   habilitarBotonesGeneracionyMayordeEdad();
 }
